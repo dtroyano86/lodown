@@ -162,3 +162,122 @@ function each(collection, action) {
     }
 }
 module.exports.each = each;
+
+/**
+ * unique: Takes an array and returns an array with all duplicates removed
+ * 
+ * @param {Array} arr: Array to remove duplicates from
+ * 
+ * @return {Array}: arr without duplicates
+ */
+
+function unique(arr) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (i === indexOf(arr, arr[i])) {
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+module.exports.unique = unique;
+
+/**
+ * filter: Calls the given function on each element in the given array and
+ * returns a new array of elements that passed true
+ * 
+ * @param {Array} arr: Array of elements to be tested
+ * @param {Function} func: Function that returns True/False 
+ * 
+ * @return {Array}: Elements that returned true on the test
+ */
+
+function filter(arr, func) {
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if (func(arr[i], i, arr) === true) {
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+module.exports.filter = filter;
+
+/**
+ * reject: Calls the given function on each element in the given array and
+ * returns a new array of elements that returned false
+ * 
+ * @param {Array} arr: Array of elements to be tested
+ * @param {Function} func: Function that returns True/False
+ * 
+ * @return {Array}: Elements that returned false on the test
+ */
+
+function reject(arr, func) {
+    let result = [];
+    let filterArray = filter(arr, func);
+    for (let i = 0; i < arr.length; i++) {
+        if (!contains(filterArray, arr[i])) {
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+module.exports.reject = reject;
+
+/**
+ * partition: Returns an array of arrays. One array is elements that returned true
+ * from the given func and the other is ones that returned false.
+ * 
+ * @param {Array} arr: Array of elements to be split
+ * @param {Function} func: (element, key, arr)
+ * 
+ * @return {Array}: Elements that returned true, Elements that returned false
+ */
+
+function partition(arr, func) {
+    return [
+        arr.filter(function (x, i) { return func(x, i, arr); }),
+        arr.filter((x, i) => !func(x, i, arr))
+    ];
+}
+module.exports.partition = partition;
+
+/**
+ * map: Calls a function on each element in a collection and returns an array
+ * of the results of the function
+ * 
+ * @param {Array, Object} coll: Array or Object to be passed
+ * @param {Function} func: (value, key(index), coll)
+ * 
+ * @return {Array}: the results of running the function on all the elements
+ */
+
+function map(coll, func) {
+    let result = [];
+    if (Array.isArray(coll)) {
+        for (let i = 0; i < coll.length; i++) {
+            result.push(func(coll[i], i, coll));
+        }
+    } else {
+        for (let key in coll) {
+            result.push(func(coll[key], key, coll));
+        }
+    }
+    return result;
+}
+module.exports.map = map;
+
+/**
+ * pluck: Looks through an array of objects for a given key, and returns
+ * an array of those values
+ * 
+ * @param {Array} arr: Array of objects to be searched
+ * @param {String} prop: Property name to be located
+ * 
+ * @return {Array}: Array of prop values
+ */
+function pluck(arr, prop) {
+    return map(arr, (elem, id, coll) => elem[prop]);
+}
+module.exports.pluck = pluck;
