@@ -3,6 +3,19 @@
 // YOU KNOW WHAT TO DO //
 
 /**
+ * identity: Returns the given value unchanged.
+ * 
+ * @param {Value} value: Input value can be any datatype.
+ * 
+ * @return {Value}: The value returned will be the same as the input value unaltered
+ * 
+ */
+function identity(value){
+    return value;
+}
+module.export.identity = identity;
+
+/**
  * each: Designed to loop over a collection, Array or Object, and applies the 
  * action Function to each value in the collection.
  * 
