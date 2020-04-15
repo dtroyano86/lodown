@@ -281,3 +281,98 @@ function pluck(arr, prop) {
     return map(arr, (elem, id, coll) => elem[prop]);
 }
 module.exports.pluck = pluck;
+
+/**
+ * every: Checks every element in a collection against a function that returns true/false
+ * and only returns true if every element returns true
+ * 
+ * @param {Object, Array} coll: Collection to be tested
+ * @param {Function} func: Function that returns a boolean
+ * 
+ * @return {Boolean}: True if  the tests were true otherwise false 
+ */
+
+function every(coll, func) {
+    if (func instanceof Function) {
+        for (let key in coll) {
+            if (!func(coll[key], key, coll)) {
+                return false;
+            }
+        }
+    } else {
+        for (let key in coll) {
+            if (!coll[key]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+module.exports.every = every;
+
+/**
+ * some: Checks every element in a collection against a function that returns true/false
+ * and returns true if any element returns true
+ * 
+ * @param {Object, Array} coll: Collection to be tested
+ * @param {Function} func: Function that returns a boolean
+ * 
+ * @return {Boolean}: True if any of the tests were true otherwise false 
+ */
+
+function some(coll, func) {
+    if (func instanceof Function) {
+        for (let key in coll) {
+            if (func(coll[key], key, coll)) {
+                return true;
+            }
+        }
+    } else {
+        for (let key in coll) {
+            if (coll[key]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+module.exports.some = some;
+
+/**
+ * reduce: Applies a transformation to each element in an array using the results of the previous element's
+ * transformation (or starting with a given seed) as an input
+ * 
+ * @param {Array} arr: Array to be transformed
+ * @param {Function} func: (previousResult(seed), currentElement, Index)
+ * @param {Value} seed: Starting value
+ * 
+ * @returns {Value}: The singular combined result
+ */
+
+function reduce(arr, func, seed) {
+    let prevResult = seed === undefined ? arr[0] : seed;
+    for (let i = (seed === undefined ? 1 : 0); i < arr.length; i++) {
+        prevResult = func(prevResult, arr[i], i);
+        if (i === arr.length - 1) {
+            return prevResult;
+        }
+    }
+}
+module.exports.reduce = reduce;
+
+/**
+ * extend: Takes any number of objects and assigns all of the properties of each othem to the first object
+ * 
+ * @param  {Objects} objs: Any number of objects to be condensed
+ * 
+ * @returns {Object}: First object that contains the keys and properties of all the others
+ */
+
+function extend(...objs) {
+    for (let i = 1; i < objs.length; i++) {
+        for (let key in objs[i]) {
+            objs[0][key] = objs[i][key];
+        }
+    }
+    return objs[0];
+}
