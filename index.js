@@ -13,7 +13,7 @@
 function identity(value) {
     return value;
 }
-module.export.identity = identity;
+module.exports.identity = identity;
 
 /**
  * typeOf: Returns the type of the given value in a string, more specific than the 
