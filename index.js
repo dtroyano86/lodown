@@ -376,3 +376,4 @@ function extend(...objs) {
     }
     return objs[0];
 }
+module.exports.extend = extend;

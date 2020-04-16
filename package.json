@@ -1,0 +1,22 @@
+{
+  "name": "lodown-dtroyano86",
+  "version": "1.0.0",
+  "description": "my first npm package",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "istanbul cover _mocha -- test/ -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtroyano86/lodown.git"
+  },
+  "author": "Daniel Troyano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dtroyano86/lodown/issues"
+  },
+  "homepage": "https://github.com/dtroyano86/lodown#readme"
+}
