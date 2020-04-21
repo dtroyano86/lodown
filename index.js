@@ -183,11 +183,11 @@ function unique(arr) {
 module.exports.unique = unique;
 
 /**
- * filter: Calls the given function on each element in the given array and
+ * filter: Calls the given function for each element in the given array and
  * returns a new array of elements that passed true
  * 
  * @param {Array} arr: Array of elements to be tested
- * @param {Function} func: Function that returns True/False 
+ * @param {Function} func: (value, index, array) that returns True/False 
  * 
  * @return {Array}: Elements that returned true on the test
  */
@@ -204,11 +204,11 @@ function filter(arr, func) {
 module.exports.filter = filter;
 
 /**
- * reject: Calls the given function on each element in the given array and
+ * reject: Calls the given function for each element in the given array and
  * returns a new array of elements that returned false
  * 
  * @param {Array} arr: Array of elements to be tested
- * @param {Function} func: Function that returns True/False
+ * @param {Function} func: (value, index, array) that returns True/False 
  * 
  * @return {Array}: Elements that returned false on the test
  */
@@ -284,12 +284,13 @@ module.exports.pluck = pluck;
 
 /**
  * every: Checks every element in a collection against a function that returns true/false
- * and only returns true if every element returns true
+ * and only returns true if every element returns true. If no function is provided, if all
+ * the values in the given collection are truthy return true, otherwise return false.
  * 
  * @param {Object, Array} coll: Collection to be tested
  * @param {Function} func: Function that returns a boolean
  * 
- * @return {Boolean}: True if  the tests were true otherwise false 
+ * @return {Boolean}: True if the tests were true otherwise false 
  */
 
 function every(coll, func) {
@@ -312,7 +313,8 @@ module.exports.every = every;
 
 /**
  * some: Checks every element in a collection against a function that returns true/false
- * and returns true if any element returns true
+ * and returns true if any element returns true. If no function is provided, if any value
+ * in the given collection is truthy than return true, otherwise return false.
  * 
  * @param {Object, Array} coll: Collection to be tested
  * @param {Function} func: Function that returns a boolean
